@@ -35,7 +35,7 @@ class BlogUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('blog:view', args=[self.kwargs.get('pk')])
+        return reverse_lazy('blog:detail', args=[self.kwargs.get('pk')])
 
 
 class BlogDetailView(LoginRequiredMixin, DetailView):
@@ -48,10 +48,10 @@ class BlogDetailView(LoginRequiredMixin, DetailView):
         }
         return render(request, 'blog/blog_detail.html', context)
 
-    def get_object(self, queryset=None):    # Задание 3: при открытии отдельной статьи увеличивать счетчик просмотров;
+    def get_object(self, queryset=None):
         objects = super().get_object(queryset)
         objects.views_count += 1
-        objects.save()
+        objects.save(update_fields=['views_count'])
         return objects
 
 
