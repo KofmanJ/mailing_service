@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить блог</a>
+</div>
+<div class="row">
+{% for object in object_list %}
+<div class="col-md-6">
+    <div class="card mb-4 box-shadow">
+        <img class="card-img-top"
+             src="{{ object.preview|blog_image }}" height="300" width="200"
+             alt="Card image cap">
+        <div style="height: 170px;" class="card-body">
+            <p class="card-text">
+                {% if object.public_date %}
+                <b>Блог: "{{ object.title|title }}"</b><br>
+                <span <b>Опубликован: {{ object.public_date }}</b></span>
+                {% else %}
+                <span class="text-muted"><b>Блог: "{{ object.title|title }}"</b></span>
+                {% endif %}
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'blog:detail' object.pk %}"
+                       class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                    <a href="{% url 'blog:edit' object.pk %}"
+                       class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                    <a href="{% url 'blog:delete' object.pk %}"
+                       class="btn btn-sm btn-outline-secondary">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
