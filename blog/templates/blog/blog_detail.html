@@ -22,9 +22,9 @@
             </div>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <a href="{% url 'blog:blog_list' %}" class="btn btn-sm btn-outline-secondary">Вернуться</a>
-                    <a href="{% url 'blog:edit' object.pk %}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
-                    <a href="{% url 'blog:delete' object.pk %}" class="btn btn-sm btn-outline-secondary">Удалить</a>
+                    <a href="{% url 'blog:blog_list' %}" class="btn btn-sm btn-outline-info">Вернуться</a>
+                    <a href="{% url 'blog:edit' object.pk %}" class="btn btn-sm btn-outline-success">Редактировать</a>
+                    <a href="{% url 'blog:delete' object.pk %}" class="btn btn-sm btn-outline-danger">Удалить</a>
                 </div>
                 <div class="card_footer">
                     Просмотры: {{ object.views_count }}
