@@ -9,13 +9,13 @@
 <div class="col-md-6">
     <div class="card mb-4 box-shadow">
         <img class="card-img-top"
-             src="{{ object.preview|blog_image }}" height="300" width="200"
+             src="{{ object.preview|blog_image }}" height="500"
              alt="Card image cap">
         <div style="height: 170px;" class="card-body">
             <p class="card-text">
                 {% if object.public_date %}
                 <b>Блог: "{{ object.title|title }}"</b><br>
-                <span <b>Опубликован: {{ object.public_date }}</b></span>
+                <span><b>Опубликован: {{ object.public_date }}</b></span>
                 {% else %}
                 <span class="text-muted"><b>Блог: "{{ object.title|title }}"</b></span>
                 {% endif %}
