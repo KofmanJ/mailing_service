@@ -5,27 +5,33 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 from blog.models import Blog
+from blog.forms import BlogForm
 
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
     model = Blog
-    fields = ('title', 'content', 'preview', )
+    form_class = BlogForm
     success_url = reverse_lazy('blog:blog_list')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
 
 class BlogListView(ListView):
     model = Blog
     fields = ('title', 'content', 'preview', 'public_date', )
 
-    # def get_queryset(self, *args, **kwargs):  # Выводит в список статей только c положительным признаком публикации
-    #     queryset = super().get_queryset(*args, **kwargs)
-    #     queryset = queryset.filter(public_date=True)
-    #     return queryset
-
 
 class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
-    fields = ('title', 'content', 'preview', )
+    form_class = BlogForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
 
     def form_valid(self, form):
         if form.is_valid():
